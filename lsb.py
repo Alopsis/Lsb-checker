@@ -52,7 +52,7 @@ def usage():
     print(" -i    | image name")
     print(" -p    | pas de l'image (si il faut aller de 2 en 2 par exemple)")
     print(" -d    | direction du lsb (droite, gauche, diagonale)")
-    print(" -b    | choix des bits a utiliser (r,g,b,a)")
+    print(" -b    | choix des bits a utiliser (r-> red,g-> green,b-> blue,a-> all bits)")
     exit()
 
 def decode_binary_strings(s):
