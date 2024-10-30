@@ -15,3 +15,9 @@ Le chiffrement des messages peut être fait uniquement sur les bits Blue par exe
 - Utilisation de -b g pour afficher uniquement les green
 - Utilisation de -b b pour afficher uniquement les blue
 - Utilisation de -b a (all) pour afficher tous les bits. (Red puis blue puis green)
+
+### La direction
+La direction est également modifiable. 
+- Utilisation de "-d diagonale" pour afficher le message s'il est en diagonale
+- Utilisation de "-d droite" pour afficher le message s'il est vers la droite 
+- Utilisation de "-d bas" pour afficher le message s'il est vers le bas 

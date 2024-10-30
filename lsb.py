@@ -13,7 +13,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Script avec une option -p ou --pas")
 parser.add_argument("-p", "--pas", type=int, default=1, help="Option pour spécifier un pas")
 parser.add_argument("-i","--input", type=str,required=True, help="Image d'entrée")
-parser.add_argument("-d","--direction", type=str,default="droite", help="Direction des LDB (droite,gauche,diagonale)")
+parser.add_argument("-d","--direction", type=str,default="droite", help="Direction des LDB (droite,bas,diagonale)")
 parser.add_argument("-b","--bits", type=str, default="a" , help="LSB des bits voulus (r,g,b,a)")
 
 args = parser.parse_args()
@@ -37,7 +37,7 @@ def check_arg():
         usage()
     if not is_image(inputFile):
         usage()
-    if direction not in ["droite", "gauche", "diagonale"]:
+    if direction not in ["droite", "bas", "diagonale"]:
         usage()
     if bits not in ["r","g","b","a"]:
         print("1")
@@ -51,7 +51,7 @@ def usage():
     print("")
     print(" -i    | image name")
     print(" -p    | pas de l'image (si il faut aller de 2 en 2 par exemple)")
-    print(" -d    | direction du lsb (droite, gauche, diagonale)")
+    print(" -d    | direction du lsb (droite, bas, diagonale)")
     print(" -b    | choix des bits a utiliser (r-> red,g-> green,b-> blue,a-> all bits)")
     exit()
 
@@ -64,7 +64,7 @@ def extract_lsb(image_path, step, direction,bit):
     for j in range(0, img.shape[1], step):
         if direction == "droite":
             pixel = img[0, j]
-        elif direction == "gauche":
+        elif direction == "bas":
             pixel = img[j, 0]
         elif direction == "diagonale":
             if j < min(img.shape[0], img.shape[1]):
