@@ -9,6 +9,13 @@ import argparse
 # - direction 
 # - les bits voulus 
 
+                                                                           
+print(",--.          ,--.             ,--.                  ,--.                  ")
+print("|  |    ,---. |  |-.      ,---.|  ,---.  ,---.  ,---.|  |,-. ,---. ,--.--. ")
+print("|  |   (  .-' | .-. '    | .--'|  .-.  || .-. :| .--'|     /| .-. :|  .--' ")
+print("|  '--..-'  `)| `-' |    \ `--.|  | |  |\   --.\ `--.|  \  \\   --.|  |    ")
+print("`-----'`----'  `---'      `---'`--' `--' `----' `---'`--'`--'`----'`--'    ")
+                                                                           
 ## Récuperation des options 
 parser = argparse.ArgumentParser(description="Script avec une option -p ou --pas")
 parser.add_argument("-p", "--pas", type=int, default=1, help="Option pour spécifier un pas")
