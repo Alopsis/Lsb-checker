@@ -74,10 +74,7 @@ def decode_binary_strings(s):
 
 
 
-def print_message(message):
-    print("\033[31m----------------------------\033[0m")  # Rouge
-    print("\033[31m-------Message décodé-------\033[0m")  # Rouge
-    print("\033[31m----------------------------\033[0m")  # Rouge
+
 
 def extract_lsb_brute_force(image_path):
     img = cv2.imread(image_path)
@@ -110,9 +107,11 @@ def extract_lsb_brute_force(image_path):
                         bits.append(str(lsb_red))
                         bits.append(str(lsb_green))
                         bits.append(str(lsb_blue))
-                        
                 text = ''.join(bits)
-                print_message("test")
+                print("\033[31m----------------------------\033[0m")  # Rouge
+                print("\033[31m-------Message décodé-------\033[0m")  # Rouge
+                print("\033[31m----------------------------\033[0m")  # Rouge
+                print(f"Pas = \033[32m{step}\033[0m Direction = \033[32m{direction}\033[0m bit(s) = \033[32m{bit}\033[0m")
                 print("Voici le message décodé")
                 print(decode_binary_strings(text))  
 
