@@ -1,23 +1,70 @@
 # Lsb-checker
-Lsb-checker est un outil qui permet de retrouver un message caché dans une image avec la technique de stéganography "LSB". L'outil a été pensé pour permettre d'avoir une flexibilité sur l'emplacement du message.
 
-## Diffèrents modes 
-Lsb-checker permet de changer plusieurs parametres tels que le Pas, les bits pris en compte sur la récuperation du message et la direction du message caché.
+**Lsb-checker** est un outil permettant d’extraire un message caché dans une image à l’aide de la technique de stéganographie **LSB (Least Significant Bit)**.  
+Il a été conçu pour offrir une grande flexibilité lors de la récupération du message, notamment en permettant de choisir l’emplacement, les bits utilisés ou encore la direction de lecture.
 
-### Le pas
-Le pas de la récuperation du message a été crée pour contrer les chiffrements du message tous les 2 bits. 
 
-Pour changer ce pas, il suffit d'utiliser l'option -p N avec N étant le pas. Par défaut, cette valeur est a 1. 
+## Installation 
 
-### Les bits 
-Le chiffrement des messages peut être fait uniquement sur les bits Blue par exemple. Avec Lsb-checker, on peut demander de regarder uniquement certains bits. 
-- Utilisation de -b r pour afficher uniquement les red
-- Utilisation de -b g pour afficher uniquement les green
-- Utilisation de -b b pour afficher uniquement les blue
-- Utilisation de -b a (all) pour afficher tous les bits. (Red puis blue puis green)
+L'installation de Lsb-checker est très simple et se base sur python3 et le repository GitHub :
+```
+https://github.com/Alopsis/Lsb-checker
+cd Lsb-checker
+python3 -m venv dep
+source ./dep/bin/activate
+python3 -p {pas} -b {Option bit analysé} -d {direction} -i {chemin vers une image}
+```
 
-### La direction
-La direction est également modifiable. 
-- Utilisation de "-d diagonale" pour afficher le message s'il est en diagonale
-- Utilisation de "-d droite" pour afficher le message s'il est vers la droite 
-- Utilisation de "-d bas" pour afficher le message s'il est vers le bas 
+## Exemple 
+
+Lors du HeroCTF v6, il y avait un challenge ou il fallait utiliser la technique du least significiant Bit pour retrouver le flag : 
+```
+python3 lsb.py  -b b -d diagonale -i ./exemple/secret.png
+```
+[![Voir la démonstration](demo-preview.png)](./readme/video.mp4)
+
+
+## Fonctionnalités
+
+Lsb-checker propose plusieurs options permettant d’adapter l’analyse en fonction de la méthode de dissimulation utilisée :
+
+- **Pas de lecture personnalisable**
+- **Sélection des bits à analyser (R, G, B)**
+- **Direction de lecture modifiable**
+
+---
+
+## 1. Le pas de lecture
+
+Le *pas* correspond à l’intervalle entre les pixels analysés.  
+Cette fonctionnalité permet, par exemple, de contrer certaines méthodes de dissimulation où le message est inséré tous les 2 ou 3 pixels.
+
+- Utilisation : `-p N`  
+  Avec `N` le pas souhaité.  
+  **Valeur par défaut : 1**
+
+---
+
+## 2. Les bits analysés
+
+Certains messages peuvent être cachés uniquement dans un canal couleur (par exemple uniquement dans le Bleu).  
+Lsb-checker permet donc de sélectionner précisément les bits à inspecter :
+
+- `-b r` : analyse uniquement du canal **Red**
+- `-b g` : analyse uniquement du canal **Green**
+- `-b b` : analyse uniquement du canal **Blue**
+- `-b a` : analyse de **tous** les canaux (Red → Green → Blue)
+
+---
+
+## 3. La direction de lecture
+
+La direction dans laquelle le message a été inscrit peut varier. Lsb-checker permet de choisir entre plusieurs directions :
+
+- `-d diagonale` : lecture en diagonale
+- `-d droite` : lecture horizontale vers la droite
+- `-d bas` : lecture verticale vers le bas
+
+---
+
+N’hésite pas à me dire si tu veux rajouter une section "Installation", "Exemples", ou un schéma explicatif !
