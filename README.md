@@ -66,5 +66,3 @@ La direction dans laquelle le message a été inscrit peut varier. Lsb-checker p
 - `-d bas` : lecture verticale vers le bas
 
 ---
-
-N’hésite pas à me dire si tu veux rajouter une section "Installation", "Exemples", ou un schéma explicatif !
