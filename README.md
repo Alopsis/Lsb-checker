@@ -22,9 +22,7 @@ Lors du HeroCTF v6, il y avait un challenge ou il fallait utiliser la technique 
 python3 lsb.py  -b b -d diagonale -i ./exemple/secret.png
 ```
 
-<p align="center">
-  <video src="./readme/video.mp4" width="500px"></video>
-</p>
+[![Voir la démonstration](./readme/demo.png)](./readme/video.mp4)
 
 ## Fonctionnalités
 
