@@ -25,6 +25,8 @@ parser.add_argument("-i","--input", type=str,required=True, help="Image d'entré
 parser.add_argument("-d","--direction", type=str,default="droite", help="Direction des LDB (droite,bas,diagonale)")
 parser.add_argument("-b","--bits", type=str, default="a" , help="LSB des bits voulus (r,g,b,a)")
 parser.add_argument("-bf", "--brute-force", action="store_true", help="Mode brute force")
+parser.add_argument("-pX","--pixelX", type=int, default=0, help="Position X du pixel de départ")
+parser.add_argument("-pY","--pixelY", type=int, default=0, help="Position Y du pixel de départ")
 args = parser.parse_args()
 
 # Fonctions 
@@ -40,7 +42,11 @@ def check_arg():
     inputFile = args.input
     direction = args.direction
     bits = args.bits
-
+    pX = args.pixelX
+    pY = args.pixelY
+    if pX < 0 or pY < 0:
+        print("Les coordonnées des pixels doivent être positives.")
+        usage()
     if not file_exists(inputFile):
         print("Votre fichier n'existe pas.")
         usage()
@@ -56,7 +62,7 @@ def check_arg():
         usage()
     if bits not in ["r","g","b","a"]:
         usage()
-    extract_lsb(inputFile,step,direction,bits)
+    extract_lsb(inputFile,step,direction,bits,pX,pY)
 def usage():
     print("-------------------------")
     print("----------Usage----------")
@@ -116,37 +122,47 @@ def extract_lsb_brute_force(image_path):
                 print(decode_binary_strings(text))  
 
 
-def extract_lsb(image_path, step, direction,bit):
+def extract_lsb(image_path, step, direction, bit, pX, pY):
     img = cv2.imread(image_path)
     bits = []
-    for j in range(0, img.shape[1], step):
+    height, width = img.shape[0], img.shape[1]
+    for k in range(0, 999999999, step):  # boucle très large car break manuel
         if direction == "droite":
-            pixel = img[0, j]
-        elif direction == "bas":
-            pixel = img[j, 0]
-        elif direction == "diagonale":
-            if j < min(img.shape[0], img.shape[1]):
-                pixel = img[j, j]
-            else:
+            x = pX
+            y = pY + k
+            if y >= width:
                 break
-        lsb_blue = pixel[0] & 1
+        elif direction == "bas":
+            x = pX + k
+            y = pY
+            if x >= height:
+                break
+        elif direction == "diagonale":
+            x = pX + k
+            y = pY + k
+            if x >= height or y >= width:
+                break
+        else:
+            print("Direction inconnue")
+            return
+        pixel = img[x, y]
+        lsb_blue  = pixel[0] & 1
         lsb_green = pixel[1] & 1
-        lsb_red = pixel[2] & 1
+        lsb_red   = pixel[2] & 1
         if bit == "r":
             bits.append(str(lsb_red))
         elif bit == "g":
             bits.append(str(lsb_green))
         elif bit == "b":
             bits.append(str(lsb_blue))
-    
         elif bit == "a":
             bits.append(str(lsb_red))
             bits.append(str(lsb_green))
             bits.append(str(lsb_blue))
-            
     text = ''.join(bits)
-    print("Voici le message décodé")
-    print(decode_binary_strings(text))  
+    print("Voici le message décodé :")
+    print(decode_binary_strings(text))
+
 
 
 # Lancement 

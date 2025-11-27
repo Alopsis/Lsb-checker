@@ -66,3 +66,10 @@ La direction dans laquelle le message a été inscrit peut varier. Lsb-checker p
 - `-d bas` : lecture verticale vers le bas
 
 ---
+
+## 4. Les coordonnées de départ
+
+Les coordonnées de départ auquel le message va commencer. Lsb-checker permet de choisir le début du decodage : 
+
+- `-pX 1` : lecture du message à partir du pixel X 1
+- `-pY 1` : lecture du message à partir du pixel Y 1
