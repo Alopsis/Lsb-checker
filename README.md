@@ -31,6 +31,8 @@ Lsb-checker propose plusieurs options permettant d’adapter l’analyse en fonc
 - **Pas de lecture personnalisable**
 - **Sélection des bits à analyser (R, G, B)**
 - **Direction de lecture modifiable**
+- **Coordonnées de départ**
+- **Largeur et hauteur du message décodé** 
 
 ---
 
@@ -73,3 +75,11 @@ Les coordonnées de départ auquel le message va commencer. Lsb-checker permet d
 
 - `-pX 1` : lecture du message à partir du pixel X 1
 - `-pY 1` : lecture du message à partir du pixel Y 1
+
+--- 
+
+## 5. Largeur et hauteur pour le mode carré
+
+Il y a la possibilité de faire le mode carré en spécifiant la hauteur et la largeur :
+- `-largeur 10` : carré de largeur 10
+- `-hauteur 10` : carré de hauteur 10
