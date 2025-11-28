@@ -69,7 +69,8 @@ def check_arg():
         usage()
     if bits not in ["r","g","b","a"]:
         usage()
-    extract_lsb(inputFile,step,direction,bits,pX,pY)
+    extract_lsb(inputFile, step, direction, bits, pX, pY, largeur, hauteur)
+
 def usage():
     print("-------------------------")
     print("----------Usage----------")
@@ -84,9 +85,6 @@ def usage():
 
 def decode_binary_strings(s):
     return ''.join(chr(int(s[i*8:i*8+8], 2)) for i in range(len(s) // 8)) # Récupere le dernier bit de l'octet 
-
-
-
 
 
 def extract_lsb_brute_force(image_path):
@@ -129,20 +127,24 @@ def extract_lsb_brute_force(image_path):
                 print(decode_binary_strings(text))  
 
 
-def extract_lsb(image_path, step, direction, bit, pX, pY):
+def extract_lsb(image_path, step, direction, bit, pX, pY, max_largeur, max_hauteur):
     img = cv2.imread(image_path)
     bits = []
     height, width = img.shape[0], img.shape[1]
-    if largeur == 0:
+    
+    # Calculer les limites
+    if max_largeur == 0:
         max_largeur = width
     else:
-        max_largeur = min(pY + largeur, width)
-    if hauteur == 0:
+        max_largeur = min(pY + max_largeur, width)
+    
+    if max_hauteur == 0:
         max_hauteur = height
     else:
-        max_hauteur = min(pX + hauteur, height)
+        max_hauteur = min(pX + max_hauteur, height)
+    
     if direction == "carre":
-        if largeur == 0 or hauteur == 0:
+        if max_largeur == 0 or max_hauteur == 0:
             print("ERREUR : Pour le mode 'carre', vous devez spécifier une largeur et une hauteur non nulles")
             return
         
@@ -197,12 +199,11 @@ def extract_lsb(image_path, step, direction, bit, pX, pY):
                 bits.append(str(lsb_red))
                 bits.append(str(lsb_green))
                 bits.append(str(lsb_blue))
-        text = ''.join(bits)
-        print("Voici le message décodé :")
-        print(decode_binary_strings(text))
-
+    
+    text = ''.join(bits)
+    print("Voici le message décodé :")
+    print(decode_binary_strings(text))
 
 
 # Lancement 
 check_arg()
-	
